@@ -24,7 +24,6 @@ export class ISelectPizzaUseCase {
     );
 
     console.log(cachedPizza);
-
     if (typeof cachedPizza === 'string') {
       const cachedPizzaParsed: Pizza = JSON.parse(cachedPizza);
       return {
@@ -37,6 +36,11 @@ export class ISelectPizzaUseCase {
 
     if (typeof pizza === 'undefined') return new PizzaNotFoundErrorResponse();
 
+    // pizza-${pizza.public_id}
+    await this.iCacheService.set(`pizza-${pizza.public_id}`, JSON.stringify(pizza), {
+      EX: 120
+    });
+    
     return {
       pizza: pizza,
     };

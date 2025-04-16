@@ -1,5 +1,6 @@
 import fastify, { FastifyInstance } from 'fastify';
 import { Routes } from './routes/Routes';
+import { cache } from '../cache/redis';
 
 class Application {
   constructor(private readonly server: FastifyInstance) {}
@@ -26,5 +27,3 @@ const routes = new Routes(server);
 routes.setupRoutes();
 const application: Application = new Application(server);
 application.run();
-
-

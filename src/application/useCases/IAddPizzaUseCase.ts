@@ -32,9 +32,6 @@ export class IAddPizzaUseCase {
       price,
       pic_id,
     });
-
-    // pizza-${pizza.public_id}
-    await this.iCacheService.set(`pizza-${pizza.public_id}`, JSON.stringify(pizza));
   
     return {
       pizza: pizza,
